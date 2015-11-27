@@ -134,6 +134,7 @@
       'src/wrappers/pipe_wrap.cc',
       'src/wrappers/node_http_parser.cc',
       'src/wrappers/node_zlib.cc',
+      'src/wrappers/spawn_sync.cc',
 
       'src/external/module_wrap.cc',
 

@@ -10,6 +10,7 @@ NODE_EXT_LIST_ITEM(node_fs)
 NODE_EXT_LIST_ITEM(node_http_parser)
 NODE_EXT_LIST_ITEM(node_os)
 NODE_EXT_LIST_ITEM(node_zlib)
+NODE_EXT_LIST_ITEM(node_spawn_sync)
 
 // libuv rewrite
 NODE_EXT_LIST_ITEM(node_jxtimers_wrap)
