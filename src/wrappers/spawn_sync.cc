@@ -299,7 +299,7 @@ void SyncProcessStdioPipe::SetError(int error) {
   process_handler_->SetPipeError(error);
 }
 
-
+// not sure about this!
 uv_buf_t SyncProcessStdioPipe::AllocCallback(uv_handle_t* handle, size_t suggested_size) {
   JS_ENTER_SCOPE_COM();
   JS_HANDLE_OBJECT objl = JS_HANDLE_OBJECT();
@@ -849,7 +849,6 @@ int SyncProcessRunner::ParseStdioOption(int child_fd,
     
     if (readable) {
       JS_LOCAL_VALUE input = JS_GET_NAME(js_stdio_option, STD_TO_STRING("input"));
-      char *asd = STRING_TO_STD(input);
       if (Buffer::HasInstance(input)) {
         buf = uv_buf_init(Buffer::Data(input),
           static_cast<unsigned int>(Buffer::Length(input)));
