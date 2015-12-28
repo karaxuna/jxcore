@@ -21,6 +21,8 @@ namespace node {
 static bool watcher_alive_ = false;
 
 void JXTimersWrap::checkKeys() {
+  JS_ENTER_SCOPE_COM();
+  JS_DEFINE_STATE_MARKER(com);
   std::queue<std::string> todelete;
 
   if (XSpace::Timers() == NULL) return;
@@ -43,6 +45,10 @@ void JXTimersWrap::checkKeys() {
 #else
         timers->erase(it++);
 #endif
+        if (!JS_IS_EMPTY(timer.handle)) {
+          JS_LOCAL_OBJECT objl = JS_OBJECT_FROM_PERSISTENT(timer.handle);
+          MakeCallback(objl, "onexpire", 0, NULL);
+        }
       } else {
         ++it;
         counter++;

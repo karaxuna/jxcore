@@ -23,6 +23,7 @@
 struct ttlTimer {
   uint64_t slice;
   uint64_t start;
+  JS_PERSISTENT_OBJECT handle;
 };
 
 #define EXTERNAL_DATA_STRING 1

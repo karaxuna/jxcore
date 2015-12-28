@@ -328,6 +328,12 @@ JS_METHOD(JXUtilsWrap, SetSourceExpiration) {
 
   int64_t tmo = args.GetInteger(1);
 
+  JS_PERSISTENT_OBJECT handle;
+  JS_NEW_EMPTY_PERSISTENT_OBJECT(handle);
+  JS_LOCAL_OBJECT objl = JS_OBJECT_FROM_PERSISTENT(handle);
+  JS_HANDLE_FUNCTION cb = args.GetAsFunction(2);
+  JS_NAME_SET(objl, STD_TO_STRING("onexpire"), cb);
+
   XSpace::LOCKTIMERS();
   _TimerStore *timers = XSpace::Timers();
   if (timers != NULL) {
@@ -335,6 +341,7 @@ JS_METHOD(JXUtilsWrap, SetSourceExpiration) {
     ttlTimer timer;
     timer.slice = tmo * 1000000;
     timer.start = uv_hrtime();
+    timer.handle = handle;
     timers->insert(std::make_pair(jxss, timer));
   }
   XSpace::SetHasKey(true);
